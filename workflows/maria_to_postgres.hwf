@@ -43,8 +43,6 @@
       <create_parent_folder>N</create_parent_folder>
       <exec_per_row>N</exec_per_row>
       <filename>${PROJECT_HOME}/pipelines/maria_to_postgres.hpl</filename>
-      <logext/>
-      <logfile/>
       <loglevel>Basic</loglevel>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
@@ -55,7 +53,7 @@
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>192</xloc>
+      <xloc>272</xloc>
       <yloc>48</yloc>
       <attributes_hac/>
     </action>
@@ -65,22 +63,84 @@
       <type>SUCCESS</type>
       <attributes/>
       <parallel>N</parallel>
-      <xloc>336</xloc>
+      <xloc>528</xloc>
       <yloc>48</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>Repeat</name>
+      <description/>
+      <type>Repeat</type>
+      <attributes/>
+      <delay/>
+      <filename>${PROJECT_HOME}/pipelines/maria_to_postgres.hpl</filename>
+      <keep_values>N</keep_values>
+      <logfile_add_date>Y</logfile_add_date>
+      <logfile_add_repetition>N</logfile_add_repetition>
+      <logfile_add_time>N</logfile_add_time>
+      <logfile_appended>Y</logfile_appended>
+      <logfile_base/>
+      <logfile_enabled>N</logfile_enabled>
+      <logfile_extension>log</logfile_extension>
+      <logfile_update_interval>5000</logfile_update_interval>
+      <parameters>
+</parameters>
+      <run_configuration>local</run_configuration>
+      <variable_name/>
+      <variable_value/>
+      <parallel>N</parallel>
+      <xloc>160</xloc>
+      <yloc>48</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>Wait for</name>
+      <description/>
+      <type>DELAY</type>
+      <attributes/>
+      <maximumTimeout>60</maximumTimeout>
+      <scaletime>0</scaletime>
+      <parallel>N</parallel>
+      <xloc>400</xloc>
+      <yloc>48</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>End Repeat</name>
+      <description/>
+      <type>EndRepeat</type>
+      <attributes/>
+      <parallel>N</parallel>
+      <xloc>480</xloc>
+      <yloc>208</yloc>
       <attributes_hac/>
     </action>
   </actions>
   <hops>
     <hop>
       <from>Start</from>
-      <to>maria_to_postgres.hpl</to>
+      <to>Repeat</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
+      <from>Repeat</from>
+      <to>maria_to_postgres.hpl</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>maria_to_postgres.hpl</from>
-      <to>Success</to>
+      <to>Wait for</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for</from>
+      <to>End Repeat</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>

@@ -49,6 +49,11 @@
       "name" : "PG_PASSWORD",
       "value" : "postgres",
       "description" : ""
+    },
+    {
+      "name" : "NEO4J_LOGGING_CONNECTION",
+      "value" : "neo4j_hop",
+      "description" : ""
     }
   ]
 }
