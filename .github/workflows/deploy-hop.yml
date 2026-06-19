@@ -31,6 +31,7 @@ jobs:
           if [ ${#missing[@]} -gt 0 ]; then
             echo "available=false" >> "$GITHUB_OUTPUT"
             echo "::warning::Missing deploy secrets: ${missing[*]}"
+            echo "::warning::Configure missing secrets in Actions settings."
             exit 0
           fi
 
