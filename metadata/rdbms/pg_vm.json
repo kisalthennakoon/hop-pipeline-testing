@@ -2,13 +2,13 @@
   "virtualPath": "",
   "rdbms": {
     "POSTGRESQL": {
-      "databaseName": "",
+      "databaseName": "${PG_DATABASE}",
       "pluginId": "POSTGRESQL",
       "accessType": 0,
-      "hostname": "",
-      "password": "Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9",
+      "hostname": "${PG_HOST}",
+      "password": "${PG_PASSWORD}",
       "pluginName": "PostgreSQL",
-      "port": "",
+      "port": "${PG_PORT}",
       "attributes": {
         "SUPPORTS_TIMESTAMP_DATA_TYPE": "Y",
         "QUOTE_ALL_FIELDS": "N",
@@ -19,8 +19,8 @@
         "FORCE_IDENTIFIERS_TO_UPPERCASE": "N",
         "PREFERRED_SCHEMA_NAME": ""
       },
-      "manualUrl": "jdbc:postgresql://localhost:5432/mydatabase",
-      "username": "postgres"
+      "manualUrl": "jdbc:postgresql://${PG_HOST}:${PG_PORT}/${PG_DATABASE}",
+      "username": "${PG_USER}"
     }
   },
   "name": "pg_vm"

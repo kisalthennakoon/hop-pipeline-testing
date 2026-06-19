@@ -2,13 +2,13 @@
   "virtualPath": "",
   "rdbms": {
     "MARIADB": {
-      "databaseName": "testdb",
+      "databaseName": "${MARIA_DATABASE}",
       "pluginId": "MARIADB",
       "accessType": 0,
-      "hostname": "localhost",
-      "password": "Encrypted 2be98afc86aa7f2e4cb0ba17fcac3fd89",
+      "hostname": "${MARIA_HOST}",
+      "password": "${MARIA_PASSWORD}",
       "pluginName": "MariaDB",
-      "port": "3306",
+      "port": "${MARIA_PORT}",
       "driverClassName": "Mysql 8+",
       "attributes": {
         "SUPPORTS_TIMESTAMP_DATA_TYPE": "Y",
@@ -21,8 +21,8 @@
         "FORCE_IDENTIFIERS_TO_UPPERCASE": "N",
         "PREFERRED_SCHEMA_NAME": ""
       },
-      "manualUrl": "jdbc:mariadb://localhost:3306/testdb",
-      "username": "root"
+      "manualUrl": "jdbc:mariadb://${MARIA_HOST}:${MARIA_PORT}/${MARIA_DATABASE}",
+      "username": "${MARIA_USER}"
     }
   },
   "name": "maria_vm"
