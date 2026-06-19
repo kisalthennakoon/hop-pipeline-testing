@@ -14,7 +14,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate deployment secrets
+        id: validate_secrets
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+        run: |
+          missing=()
+          [ -z "$SERVER_HOST" ] && missing+=("SERVER_HOST")
+          [ -z "$SERVER_USER" ] && missing+=("SERVER_USER")
+          [ -z "$SERVER_SSH_KEY" ] && missing+=("SERVER_SSH_KEY")
+          [ -z "$SERVER_PORT" ] && missing+=("SERVER_PORT")
+
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Missing deploy secrets: ${missing[*]}"
+            exit 0
+          fi
+
+          echo "available=true" >> "$GITHUB_OUTPUT"
+
       - name: Deploy to Ubuntu server and run Apache Hop
+        if: steps.validate_secrets.outputs.available == 'true'
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
