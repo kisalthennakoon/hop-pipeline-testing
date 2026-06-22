@@ -1,7 +1,7 @@
 {
   "server": "127.0.0.1",
   "browserPort": "7474",
-  "databaseName": "",
+  "databaseName": "neo4j",
   "manualUrls": [],
   "automaticVariable": "",
   "usingEncryption": false,
